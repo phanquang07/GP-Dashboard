@@ -1,70 +1,74 @@
 <template>
   <a-layout-sider v-model="collapsed" :trigger="null" collapsible>
-      <div :class="['sidebar', collapsed ? 'isClose' : 'isOpen']">
-        <nuxtLink to="/">
-          <h1 class="logo-dashboard">
-            <img src="~/assets/images/logo.png" alt="Go Page" />
-          </h1>
-        </nuxtLink>
-        <a-menu
-          :default-selected-keys="['1']"
-          :default-open-keys="['sub1']"
-          mode="inline"
-          theme="dark"
-          :inline-collapsed="collapsed"
+    <div :class="['sidebar', collapsed ? 'isClose' : 'isOpen']">
+      <nuxt-link to="/">
+        <h1 class="logo-dashboard">
+          <img src="~/assets/images/logo.png" alt="Go Page" />
+        </h1>
+      </nuxt-link>
+      <a-menu
+        :default-selected-keys="['1']"
+        :default-open-keys="['sub1']"
+        mode="inline"
+        theme="dark"
+        :inline-collapsed="collapsed"
+      >
+        <a-button
+          type="primary"
+          shape="circle"
+          style="margin-bottom: 16px"
+          @click="toggleCollapsed"
         >
-          <a-button
-            type="primary"
-            shape="circle"
-            style="margin-bottom: 16px"
-            @click="toggleCollapsed"
-          >
-            <a-icon :type="collapsed ? 'right' : 'left'" />
-          </a-button>
+          <a-icon :type="collapsed ? 'right' : 'left'" />
+        </a-button>
 
-          <a-menu-item key="1">
-            <a-icon type="appstore" />
-            <span>Dashboard</span>
-          </a-menu-item>
-          <a-menu-item key="2">
-            <a-icon type="line-chart" />
-            <span>Thống kê</span>
-          </a-menu-item>
-          <a-menu-item key="3">
-            <a-icon type="shopping-cart" />
-            <span>Bán hàng</span>
-          </a-menu-item>
-          <a-menu-item key="4">
-            <a-icon type="profile" />
-            <span>Đơn hàng</span>
-          </a-menu-item>
-          <a-sub-menu key="sub1">
-            <span slot="title">
-              <a-icon type="inbox" />
-              <span>Sản phẩm</span>
-            </span>
-            <a-menu-item key="5">Quản lý sản phẩm</a-menu-item>
-            <a-menu-item key="6">Nhập hàng</a-menu-item>
-            <a-menu-item key="7">Xuất hàng</a-menu-item>
-            <a-menu-item key="8">Lịch sử bán hàng</a-menu-item>
-            <a-menu-item key="9">Kho hàng</a-menu-item>
-            <a-menu-item key="10">Chuyển kho</a-menu-item>
-          </a-sub-menu>
-          <a-menu-item key="11">
-            <a-icon type="team" />
-            <span>Khách hàng</span>
-          </a-menu-item>
-          <a-menu-item key="12">
-            <a-icon type="setting" />
-            <span>Cài đặt</span>
-          </a-menu-item>
-        </a-menu>
-      </div>
-    </a-layout-sider>
+        <a-menu-item key="1">
+          <a-icon type="appstore" />
+          <span>Dashboard</span>
+        </a-menu-item>
+        <a-menu-item key="2">
+          <a-icon type="line-chart" />
+          <span>Thống kê</span>
+        </a-menu-item>
+        <a-menu-item key="3">
+          <a-icon type="shopping-cart" />
+          <span>Bán hàng</span>
+        </a-menu-item>
+        <a-menu-item key="4">
+          <a-icon type="profile" />
+          <span>Đơn hàng</span>
+        </a-menu-item>
+        <a-sub-menu key="sub1">
+          <span slot="title">
+            <a-icon type="inbox" />
+            <span>Sản phẩm</span>
+          </span>
+          <a-menu-item key="5">Quản lý sản phẩm</a-menu-item>
+          <a-menu-item key="6">Nhập hàng</a-menu-item>
+          <a-menu-item key="7">Xuất hàng</a-menu-item>
+          <a-menu-item key="8">Lịch sử bán hàng</a-menu-item>
+          <a-menu-item key="9">Kho hàng</a-menu-item>
+          <a-menu-item key="10">Chuyển kho</a-menu-item>
+        </a-sub-menu>
+        <a-menu-item key="11">
+          <a-icon type="team" />
+          <span>Khách hàng</span>
+        </a-menu-item>
+        <a-menu-item key="12">
+          <a-icon type="setting" />
+          <span>Cài đặt</span>
+        </a-menu-item>
+      </a-menu>
+    </div>
+  </a-layout-sider>
 </template>
 
 <script>
+// import products from "@/pages/products.vue"
 export default {
+  components: {
+    // products,
+  },
   data() {
     return {
       collapsed: false,
@@ -252,11 +256,14 @@ export default {
   background: var(--blue-color) !important;
 }
 
-.ant-menu-dark .ant-menu-item, .ant-menu-dark .ant-menu-item-group-title, .ant-menu-dark .ant-menu-item>a {
+.ant-menu-dark .ant-menu-item,
+.ant-menu-dark .ant-menu-item-group-title,
+.ant-menu-dark .ant-menu-item > a {
   color: #fff;
 }
 
-.ant-menu-dark, .ant-menu-dark .ant-menu-sub {
+.ant-menu-dark,
+.ant-menu-dark .ant-menu-sub {
   color: #fff;
 }
 
@@ -272,7 +279,8 @@ export default {
   left: 71px !important;
 }
 
-.sidebar.isClose .ant-menu-dark, .ant-menu-dark .ant-menu-sub {
+.sidebar.isClose .ant-menu-dark,
+.ant-menu-dark .ant-menu-sub {
   background: var(--sidebar-color);
 }
 

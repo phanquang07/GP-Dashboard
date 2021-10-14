@@ -10,9 +10,7 @@
           <span class="header-user-fullName">{{ userName }}</span>
         </div>
         <div class="header-region">
-          <!-- <img :src="require(`~/assets/images/${user}.png`)" /> -->
-          <!-- <nuxt-img fit="cover" src="~/assets/images/user_active.png" width="100" height="100" /> -->
-          <!-- <a-avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" /> -->
+          <!-- <img :src="require(`/assets/images/${productItem.img}`)" /> -->
           <div class="header-user-active">
             <img src="~assets/images/user_active.png" />
           </div>

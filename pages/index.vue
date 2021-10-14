@@ -1,7 +1,9 @@
 <template>
   <a-layout id="components-layout-demo-custom-trigger">
+    <!-- Sidebar -->
     <comp-sidebar />
     <a-layout>
+      <!-- Header -->
       <a-layout-header class="header">
         <a-row>
           <a-col :span="4" class="header-dashboard-title">
@@ -24,10 +26,11 @@
           </a-col>
         </a-row>
       </a-layout-header>
+      <!-- Main -->
       <a-layout-content class="main">
         <a-row :gutter="[14, 14]">
           <a-col :xl="{ span:16 }" class="content-left">
-            <!-- compare-stat -->
+            <!-- Compare stats -->
             <section class="compare-stats">
               <a-form layout="inline" class="form-compare">
                 <label for="compare-stats" style="line-height: 35px">So sánh thống kê:</label>
@@ -55,46 +58,9 @@
                 </a-form-item>
               </a-form>
             </section>
-            <!-- card-stats -->
-            <section class="card-stats">
-              <a-row :gutter="[12, 12]">
-                <a-col
-                  :lg="{ span: 8 }"
-                  :md="{ span: 12 }"
-                  class="card-stats-col"
-                  v-for="(statsItem, idx) in statsList"
-                  :key="idx"
-                >
-                  <div
-                    :class="['card-stats-item', idx === 0 ? 'bg-purple'  : idx === 1 ? 'bg-pink' : idx === 2 ? 'bg-orange' : 'bg-white' ]"
-                  >
-                    <div class="revenue-stats-text">
-                      <h3>
-                        {{ statsItem.title }}
-                        <a-icon class="question-icon" type="question-circle" />
-                      </h3>
-                      <p class="number-data">{{ statsItem.value }}</p>
-                      <p class="percent-data">
-                        <a-icon :type="statsItem.trend === 0 ? 'arrow-down' : 'arrow-up' " />
-                        {{ statsItem.valueTrend }}
-                      </p>
-                    </div>
-                    <div class="icon-right">
-                      <a-icon
-                        :type="statsItem.iconRight === 0 ? 'dollar' : statsItem.iconRight === 1 ? 'medicine-box' : statsItem.iconRight === 2 ? 'team' : 'icon-none' "
-                      />
-                      <a-progress
-                        v-if="statsItem.progress === 0"
-                        type="circle"
-                        :percent="18"
-                        :width="78"
-                      />
-                    </div>
-                  </div>
-                </a-col>
-              </a-row>
-            </section>
-            <!-- stats-chart -->
+            <!-- Card stats -->
+            <card-stats />
+            <!-- Stats chart -->
             <section class="stats-chart">
               <div class="card-container">
                 <a-tabs :default-active-key="tabDefault" type="card">
@@ -119,7 +85,7 @@
                 </a-tabs>
               </div>
             </section>
-            <!-- top-product-staff -->
+            <!-- Top product-staff -->
             <section class="top-product-staff" v-for="(item, idx) in topList" :key="idx">
               <a-row class="product-staff-title">
                 <a-col :sm="{ span: 18 }" class="product-staff-title-item">
@@ -206,9 +172,9 @@
               </a-row>
             </section>
           </a-col>
-          <!-- content-right -->
+          <!-- Content right -->
           <a-col :xl="{ span:8 }" class="content-right">
-            <!-- sayHello -->
+            <!-- Say Hello -->
             <section class="sayHello">
               <h2 class="sayHello-title">Xin chào! {{ user.name }}</h2>
               <p>
@@ -216,7 +182,7 @@
                 <NuxtLink to="/">{{ user.optionLink }}</NuxtLink>
               </p>
             </section>
-            <!-- stats-info -->
+            <!-- Stats info -->
             <div class="stats-info">
               <a-row :gutter="[14, 14]">
                 <a-col
@@ -319,10 +285,12 @@
 <script>
 import CompSidebar from "@/components/CompSidebar.vue";
 import LineChartD from "@/components/chartjs/LineChartD.vue";
+import CompCardStats from "@/components/CompCardStats.vue";
 export default {
   components: {
     CompSidebar,
     LineChartD,
+    [CompCardStats.name]: CompCardStats,
   },
   data() {
     return {
@@ -378,7 +346,7 @@ export default {
           progress: 0,
         },
       ],
-      // tabsList
+      // Tab list
       tabsList: [
         {
           title: "Doanh thu",
@@ -417,7 +385,7 @@ export default {
           valueTrend: "6.5%",
         },
       ],
-      // statsInfoList
+      // Stats info list
       statsInfoList: [
         {
           title: "Thống kê hôm nay",
@@ -454,7 +422,7 @@ export default {
           selectWarehouse: 1,
         },
       ],
-      // topList
+      // Top list
       topList: [
         {
           title: "Tốp sản phẩm bán chạy",
