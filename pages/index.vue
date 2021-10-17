@@ -1,307 +1,160 @@
 <template>
-  <a-layout id="components-layout-demo-custom-trigger">
-    <!-- Sidebar -->
-    <comp-sidebar />
-    <a-layout>
-      <!-- Header -->
-      <a-layout-header class="header">
-        <a-row>
-          <a-col :span="4" class="header-dashboard-title">
-            <h2>Dashboard</h2>
-          </a-col>
-          <a-col :span="20" class="header-info-user">
-            <div class="header-user-name">
-              <a-avatar style="color: #fff; backgroundColor: #F3A100">SC</a-avatar>
-              <span class="header-user-fullName">{{ user.name }}</span>
+  <div>
+    <!-- Compare stats -->
+    <section class="compare-stats">
+      <a-form layout="inline" class="form-compare">
+        <label for="compare-stats" style="line-height: 35px">So sánh thống kê:</label>
+        <a-form-item class="form-item">
+          <a-select default-value="30days" style="width: 126px">
+            <a-select-option value="30days">30 ngày qua</a-select-option>
+            <a-select-option value="1week">tuần qua</a-select-option>
+            <a-select-option value="1day">ngày qua</a-select-option>
+          </a-select>
+        </a-form-item>
+        <a-form-item class="form-item form-item-two">
+          <label for="labelWith">với</label>
+          <a-select default-value="30days" style="width: 154px">
+            <a-select-option value="30days">30 ngày trước đó</a-select-option>
+            <a-select-option value="1week">tuần trước đó</a-select-option>
+            <a-select-option value="1day">ngày trước đó</a-select-option>
+          </a-select>
+        </a-form-item>
+        <a-form-item class="form-item">
+          <a-select default-value="all" style="width: 140px">
+            <a-select-option value="all">Tất cả các kho</a-select-option>
+            <a-select-option value="ware1">Kho 1</a-select-option>
+            <a-select-option value="ware2">Kho 2</a-select-option>
+          </a-select>
+        </a-form-item>
+      </a-form>
+    </section>
+    <!-- Card stats -->
+    <card-stats />
+    <!-- Stats chart -->
+    <section class="stats-chart">
+      <div class="card-container">
+        <a-tabs :default-active-key="tabDefault" type="card">
+          <a-tab-pane class="stats-chart-item" v-for="(tabsItem, idx) in tabsList" :key="idx+1">
+            <span slot="tab" class="stats-chart-content">
+              <h3 class="stats-chart-title">{{ tabsItem.title }}</h3>
+              <p class="stats-chart-value">{{ tabsItem.value }}</p>
+              <a-icon
+                class="stats-chart-trend"
+                :type=" tabsItem.trend === 0 ? 'arrow-down' : 'arrow-up' "
+              />
+              <span class="stats-chart-valueTrend">{{ tabsItem.valueTrend }}</span>
+            </span>
+            <div class="line-chart">
+              <LineChartD />
             </div>
-            <div class="header-region">
-              <div class="header-user-active">
-                <img :src="require(`/assets/images/${user.avt}`)" />
-              </div>
-              <div class="header-region-flag">
-                <img :src="require(`/assets/images/${user.regionImg}`)" />
-              </div>
-              <span class="header-region-name">VN</span>
-            </div>
-          </a-col>
-        </a-row>
-      </a-layout-header>
-      <!-- Main -->
-      <a-layout-content class="main">
-        <a-row :gutter="[14, 14]">
-          <a-col :xl="{ span:16 }" class="content-left">
-            <!-- Compare stats -->
-            <section class="compare-stats">
-              <a-form layout="inline" class="form-compare">
-                <label for="compare-stats" style="line-height: 35px">So sánh thống kê:</label>
-                <a-form-item class="form-item">
-                  <a-select default-value="30days" style="width: 126px">
-                    <a-select-option value="30days">30 ngày qua</a-select-option>
-                    <a-select-option value="1week">tuần qua</a-select-option>
-                    <a-select-option value="1day">ngày qua</a-select-option>
-                  </a-select>
-                </a-form-item>
-                <a-form-item class="form-item form-item-two">
-                  <label for="labelWith">với</label>
-                  <a-select default-value="30days" style="width: 154px">
-                    <a-select-option value="30days">30 ngày trước đó</a-select-option>
-                    <a-select-option value="1week">tuần trước đó</a-select-option>
-                    <a-select-option value="1day">ngày trước đó</a-select-option>
-                  </a-select>
-                </a-form-item>
-                <a-form-item class="form-item">
-                  <a-select default-value="all" style="width: 140px">
-                    <a-select-option value="all">Tất cả các kho</a-select-option>
-                    <a-select-option value="ware1">Kho 1</a-select-option>
-                    <a-select-option value="ware2">Kho 2</a-select-option>
-                  </a-select>
-                </a-form-item>
-              </a-form>
-            </section>
-            <!-- Card stats -->
-            <card-stats />
-            <!-- Stats chart -->
-            <section class="stats-chart">
-              <div class="card-container">
-                <a-tabs :default-active-key="tabDefault" type="card">
-                  <a-tab-pane
-                    class="stats-chart-item"
-                    v-for="(tabsItem, idx) in tabsList"
-                    :key="idx+1"
-                  >
-                    <span slot="tab" class="stats-chart-content">
-                      <h3 class="stats-chart-title">{{ tabsItem.title }}</h3>
-                      <p class="stats-chart-value">{{ tabsItem.value }}</p>
-                      <a-icon
-                        class="stats-chart-trend"
-                        :type=" tabsItem.trend === 0 ? 'arrow-down' : 'arrow-up' "
-                      />
-                      <span class="stats-chart-valueTrend">{{ tabsItem.valueTrend }}</span>
-                    </span>
-                    <div class="line-chart">
-                      <LineChartD />
-                    </div>
-                  </a-tab-pane>
-                </a-tabs>
-              </div>
-            </section>
-            <!-- Top product-staff -->
-            <section class="top-product-staff" v-for="(item, idx) in topList" :key="idx">
-              <a-row class="product-staff-title">
-                <a-col :sm="{ span: 18 }" class="product-staff-title-item">
-                  <h2>{{ item.title }}</h2>
-                </a-col>
-                <a-col :sm="{ span: 6 }" class="product-staff-title-item">
-                  <NuxtLink to="/">
-                    {{ item.linkName }}
-                    <a-icon type="double-right" />
-                  </NuxtLink>
-                </a-col>
-              </a-row>
-              <a-row :gutter="[0, 6]" class="product-staff-item product-staff-heading">
-                <a-col :xs="{ span: 1 }" class="orders">
-                  <h3>#</h3>
-                </a-col>
-                <a-col :xs="{ span: 11 }">
-                  <h3>{{ item.productTitle }}</h3>
-                </a-col>
-                <a-col :xs="{ span: 4 }">
-                  <h3>{{ item.revenueTitle }}</h3>
-                </a-col>
-                <a-col :xs="{ span: 4 }">
-                  <h3>{{ item.completedOrdersTitle }}</h3>
-                </a-col>
-                <a-col :xs="{ span: 4 }">
-                  <h3>{{ item.canceledOrdersTitle}}</h3>
-                </a-col>
-              </a-row>
-              <a-row
-                :gutter="[0, 6]"
-                v-for="(productItem, idx) in item.listProduct"
-                :key="idx"
-                class="product-staff-item staffs products"
-              >
-                <a-col :xs="{ span: 1 }" class="orders">
-                  <p>{{ productItem.orderNumber }}</p>
-                </a-col>
-                <a-col :xs="{ span: 11 }" class="product-staff-name-wrap">
-                  <div class="products-img">
-                    <img :src="require(`/assets/images/${productItem.img}`)" />
-                  </div>
-                  <div class="products-text">
-                    <p>{{ productItem.productName }}</p>
-                    <p>{{ productItem.productType }}</p>
-                  </div>
-                </a-col>
-                <a-col :xs="{ span: 4 }">
-                  <p>{{ productItem.revenueNumber }}</p>
-                </a-col>
-                <a-col :xs="{ span: 4 }">
-                  <p>{{ productItem.completedOrdersNumber }}</p>
-                </a-col>
-                <a-col :xs="{ span: 4 }">
-                  <p>{{ productItem.canceledOrdersNumber }}</p>
-                </a-col>
-              </a-row>
-              <a-row
-                :gutter="[0, 6]"
-                v-for="(staffItem, idx) in item.listStaff"
-                :key="idx"
-                class="product-staff-item staffs"
-              >
-                <a-col :xs="{ span: 1 }" class="orders">
-                  <p>{{ staffItem.orderNumber }}</p>
-                </a-col>
-                <a-col :xs="{ span: 11 }" class="product-staff-name-wrap">
-                  <div class="staffs-img">
-                    <img :src="require(`/assets/images/${staffItem.img}`)" />
-                  </div>
-                  <div class="staffs-text">
-                    <p>{{ staffItem.staffName }}</p>
-                  </div>
-                </a-col>
-                <a-col :xs="{ span: 4 }">
-                  <p>{{ staffItem.revenueNumber }}</p>
-                </a-col>
-                <a-col :xs="{ span: 4 }">
-                  <p>{{ staffItem.completedOrdersNumber }}</p>
-                </a-col>
-                <a-col :xs="{ span: 4 }">
-                  <p>{{ staffItem.canceledOrdersNumber }}</p>
-                </a-col>
-              </a-row>
-            </section>
-          </a-col>
-          <!-- Content right -->
-          <a-col :xl="{ span:8 }" class="content-right">
-            <!-- Say Hello -->
-            <section class="sayHello">
-              <h2 class="sayHello-title">Xin chào! {{ user.name }}</h2>
-              <p>
-                Gói đang sử dụng:
-                <NuxtLink to="/">{{ user.optionLink }}</NuxtLink>
-              </p>
-            </section>
-            <!-- Stats info -->
-            <div class="stats-info">
-              <a-row :gutter="[14, 14]">
-                <a-col
-                  :xl="{ span: 24 }"
-                  :lg="{ span: 12 }"
-                  :md="{ span: 24 }"
-                  v-for="(statsInfoItem, idx) in statsInfoList"
-                  :key="idx"
-                >
-                  <section class="stats-info-item stats-today">
-                    <h2>{{ statsInfoItem.title }}</h2>
-                    <a-row :gutter="[0, 12]" class="stats-today-item">
-                      <a-col
-                        :xs="{ span: 7 }"
-                        class="revenue-today-text"
-                      >{{ statsInfoItem.revenueText }}</a-col>
-                      <a-col
-                        :xs="{ span: 17 }"
-                        class="revenue-today-value"
-                        style="text-align: right"
-                      >{{ statsInfoItem.revenueValue }}</a-col>
-                    </a-row>
-                    <a-row
-                      v-if="statsInfoItem.cardBlueId === 1"
-                      :gutter="[12, 12]"
-                      class="stats-today-item card-blue"
-                    >
-                      <a-col
-                        :sm="{ span: 12 }"
-                        class="stats-today-col"
-                        v-for="(statsTodayItem, idx) in statsInfoItem.cardStatsToday"
-                        :key="idx"
-                      >
-                        <div class="quantity-stats-today-item">
-                          <a-icon :type="statsTodayItem.icon === 0 ? 'gift' : 'user' " />
-                          <div class="orders">
-                            <p class="orders-text">{{ statsTodayItem.title }}</p>
-                            <p class="orders-number">{{ statsTodayItem.value }}</p>
-                          </div>
-                        </div>
-                      </a-col>
-                    </a-row>
-                    <a-row
-                      v-if="statsInfoItem.selectWarehouse === 1"
-                      :gutter="[12, 12]"
-                      class="warehouse-info"
-                    >
-                      <a-col>
-                        <a-select
-                          default-value="warehouse1"
-                          class="warehouse-info-selection"
-                          style="width: 50%"
-                        >
-                          <a-select-option value="warehouse1">Kho 1</a-select-option>
-                          <a-select-option value="warehouse2">Kho 2</a-select-option>
-                          <a-select-option value="warehouse3">Tất cả các kho</a-select-option>
-                        </a-select>
-                      </a-col>
-                    </a-row>
-                    <a-row :gutter="[12, 12]" class="stats-today-item">
-                      <a-col
-                        :xs="{ span: 12 }"
-                        class="quantity-today-text"
-                      >{{ statsInfoItem.canceledText }}</a-col>
-                      <a-col
-                        :xs="{ span: 12 }"
-                        class="quantity-today-monney"
-                      >{{ statsInfoItem.canceledValue }}</a-col>
-                    </a-row>
-                    <a-row :gutter="[12, 12]" class="stats-today-item">
-                      <a-col
-                        :xs="{ span: 12 }"
-                        class="quantity-today-text"
-                      >{{ statsInfoItem.closedText }}</a-col>
-                      <a-col
-                        :xs="{ span: 12 }"
-                        class="quantity-today-monney"
-                      >{{ statsInfoItem.closedValue }}</a-col>
-                    </a-row>
-                    <a-row :gutter="[12, 12]" class="stats-today-item">
-                      <a-col
-                        :xs="{ span: 12 }"
-                        class="quantity-today-text"
-                      >{{ statsInfoItem.succeededText }}</a-col>
-                      <a-col
-                        :xs="{ span: 12 }"
-                        class="quantity-today-monney"
-                      >{{ statsInfoItem.succeededValue }}</a-col>
-                    </a-row>
-                  </section>
-                </a-col>
-              </a-row>
-            </div>
-          </a-col>
-        </a-row>
-      </a-layout-content>
-    </a-layout>
-  </a-layout>
+          </a-tab-pane>
+        </a-tabs>
+      </div>
+    </section>
+    <!-- Top product-staff -->
+    <section class="top-product-staff" v-for="(item, idx) in topList" :key="idx">
+      <a-row class="product-staff-title">
+        <a-col :sm="18" class="product-staff-title-item">
+          <h2>{{ item.title }}</h2>
+        </a-col>
+        <a-col :sm="6" class="product-staff-title-item">
+          <NuxtLink to="/">
+            {{ item.linkName }}
+            <a-icon type="double-right" />
+          </NuxtLink>
+        </a-col>
+      </a-row>
+      <a-row :gutter="[0, 6]" class="product-staff-item product-staff-heading">
+        <a-col :xs="1" class="orders">
+          <h3>#</h3>
+        </a-col>
+        <a-col :xs="11">
+          <h3>{{ item.productTitle }}</h3>
+        </a-col>
+        <a-col :xs="4">
+          <h3>{{ item.revenueTitle }}</h3>
+        </a-col>
+        <a-col :xs="4">
+          <h3>{{ item.completedOrdersTitle }}</h3>
+        </a-col>
+        <a-col :xs="4">
+          <h3>{{ item.canceledOrdersTitle}}</h3>
+        </a-col>
+      </a-row>
+      <a-row
+        :gutter="[0, 6]"
+        v-for="(productItem, idx) in item.listProduct"
+        :key="idx"
+        class="product-staff-item staffs products"
+      >
+        <a-col :xs="1" class="orders">
+          <p>{{ productItem.orderNumber }}</p>
+        </a-col>
+        <a-col :xs="11" class="product-staff-name-wrap">
+          <div class="products-img">
+            <img :src="require(`/assets/images/${productItem.img}`)" />
+          </div>
+          <div class="products-text">
+            <p>{{ productItem.productName }}</p>
+            <p>{{ productItem.productType }}</p>
+          </div>
+        </a-col>
+        <a-col :xs="4">
+          <p>{{ productItem.revenueNumber }}</p>
+        </a-col>
+        <a-col :xs="4">
+          <p>{{ productItem.completedOrdersNumber }}</p>
+        </a-col>
+        <a-col :xs="4">
+          <p>{{ productItem.canceledOrdersNumber }}</p>
+        </a-col>
+      </a-row>
+      <a-row
+        :gutter="[0, 6]"
+        v-for="(staffItem, idx) in item.listStaff"
+        :key="idx"
+        class="product-staff-item staffs"
+      >
+        <a-col :xs="{ span: 1 }" class="orders">
+          <p>{{ staffItem.orderNumber }}</p>
+        </a-col>
+        <a-col :xs="{ span: 11 }" class="product-staff-name-wrap">
+          <div class="staffs-img">
+            <img :src="require(`/assets/images/${staffItem.img}`)" />
+          </div>
+          <div class="staffs-text">
+            <p>{{ staffItem.staffName }}</p>
+          </div>
+        </a-col>
+        <a-col :xs="4">
+          <p>{{ staffItem.revenueNumber }}</p>
+        </a-col>
+        <a-col :xs="4">
+          <p>{{ staffItem.completedOrdersNumber }}</p>
+        </a-col>
+        <a-col :xs="4">
+          <p>{{ staffItem.canceledOrdersNumber }}</p>
+        </a-col>
+      </a-row>
+    </section>
+    
+  </div>
 </template>
 <script>
-import CompSidebar from "@/components/CompSidebar.vue";
 import LineChartD from "@/components/chartjs/LineChartD.vue";
 import CompCardStats from "@/components/CompCardStats.vue";
+
 export default {
+  layout: 'dashboard',
+  layout(context) {
+    return 'dashboard'
+  },
   components: {
-    CompSidebar,
     LineChartD,
     [CompCardStats.name]: CompCardStats,
   },
   data() {
     return {
-      tabDefault: 1,
-      user: {
-        avt: "user_active.png",
-        name: "Sun Cometics",
-        regionImg: "region.jpg",
-        optionLink: "Silver",
-      },
-
       // statsList
       statsList: [
         {
@@ -347,6 +200,7 @@ export default {
         },
       ],
       // Tab list
+      tabDefault: 1,
       tabsList: [
         {
           title: "Doanh thu",
@@ -385,43 +239,7 @@ export default {
           valueTrend: "6.5%",
         },
       ],
-      // Stats info list
-      statsInfoList: [
-        {
-          title: "Thống kê hôm nay",
-          revenueText: "Doanh thu:",
-          revenueValue: "12.350.000 đ",
-          canceledText: "SL đơn hủy / xóa:",
-          canceledValue: "0",
-          closedText: "SL đơn đã chốt:",
-          closedValue: "124",
-          succeededText: "SL hàng đã bán:",
-          succeededValue: "124",
-          cardBlueId: 1,
-          selectWarehouse: 0,
-          cardStatsToday: [
-            {
-              icon: 0,
-              title: "Đơn hàng",
-              value: "134",
-            },
-            {
-              icon: 1,
-              title: "Khách hàng",
-              value: "52",
-            },
-          ],
-        },
-        {
-          title: "Thông tin kho",
-          closedText: "Giá trị tồn kho:",
-          closedValue: "250.000.000 đ",
-          canceledText: "SL tồn kho:",
-          canceledValue: "1.424",
-          cardBlueId: 0,
-          selectWarehouse: 1,
-        },
-      ],
+
       // Top list
       topList: [
         {
@@ -544,57 +362,6 @@ export default {
 </script>
 
 <style>
-/* Header */
-
-.header {
-  padding: 0 20px !important;
-  height: 50px;
-  background: var(--white-color);
-  box-shadow: 0px 1px 12px rgba(0, 34, 112, 0.12);
-}
-
-.header-dashboard-title h2 {
-  line-height: 50px;
-  font-size: 17px;
-  font-weight: 700;
-}
-
-.header-info-user {
-  line-height: 50px;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.header-region {
-  display: flex;
-  margin-left: 37px;
-}
-
-.header-region-flag {
-  margin-left: 12px;
-  margin-right: 6px;
-}
-
-.header-user-avt {
-  font-size: 1.4rem;
-  font-weight: 700;
-}
-
-/* Main */
-
-.ant-layout-content {
-  margin: 0;
-  padding: 14px 10px;
-  background: #e5e5e5;
-  min-height: auto !important;
-}
-
-/* Content-left */
-
-.main {
-  padding: 14px 20px;
-}
-
 /* Form stats */
 
 .form-item {
@@ -868,115 +635,6 @@ export default {
 .top-product-staff .products-text p,
 .top-product-staff .staffs-text p {
   white-space: nowrap !important;
-}
-
-/* Content right */
-
-/* Say hello */
-
-.content-right .sayHello {
-  margin-bottom: 30px;
-  position: relative;
-}
-
-.content-right .sayHello::before {
-  content: "";
-  position: absolute;
-  height: 42px;
-  border-left: 3px solid var(--blue-color);
-}
-
-.content-right .sayHello-title {
-  font-size: 20px;
-  line-height: 23px;
-  font-weight: 700;
-  margin-left: 12px;
-}
-
-.content-right .sayHello p {
-  margin-left: 12px;
-}
-
-.content-right .sayHello p a {
-  color: var(--blue-color);
-}
-
-/* Stats today */
-
-.content-right .stats-info-item {
-  padding: 20px 16px;
-  border-radius: 10px;
-  background: var(--white-color);
-}
-
-.content-right .stats-today h2 {
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 23px;
-  margin-bottom: 6px;
-  color: var(--text-color);
-}
-
-.content-right .card-blue {
-  margin-bottom: 14px !important;
-}
-
-.content-right .stats-today-item .revenue-today-text {
-  font-size: 14px;
-  line-height: 33px;
-}
-
-.content-right .revenue-today-value {
-  font-size: 28px;
-  font-weight: 700;
-  line-height: 33px;
-}
-
-.content-right .quantity-stats-today-item {
-  display: flex;
-  padding: 10px;
-  border-radius: 10px;
-  color: var(--white-color);
-  background: var(--blue-color);
-}
-
-.content-right .quantity-stats-today-item i {
-  margin: auto 0;
-  margin-right: 10px;
-  font-size: 18px;
-  line-height: 21px;
-  padding: 9px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
-}
-
-.content-right .quantity-stats-today-item .orders {
-  font-size: 14px;
-  line-height: 21px;
-}
-
-.content-right .quantity-stats-today-item .orders-number {
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 24px;
-}
-
-.content-right .stats-today-item .quantity-today-text {
-  font-size: 14px;
-  line-height: 21px;
-}
-
-.content-right .stats-today-item .quantity-today-monney {
-  font-size: 17px;
-  line-height: 21px;
-  font-weight: 700;
-  text-align: right;
-}
-
-/* Warehouse info */
-
-.content-right .warehouse-info-selection {
-  margin: 12px 0;
 }
 
 @media screen and (min-width: 1200px) {

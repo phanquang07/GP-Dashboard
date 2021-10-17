@@ -1,4 +1,5 @@
 <template>
+  <!-- Header -->
   <a-layout-header class="header">
     <a-row>
       <a-col :span="4" class="header-dashboard-title">
@@ -7,15 +8,14 @@
       <a-col :span="20" class="header-info-user">
         <div class="header-user-name">
           <a-avatar style="color: #fff; backgroundColor: #F3A100">SC</a-avatar>
-          <span class="header-user-fullName">{{ userName }}</span>
+          <span class="header-user-fullName">{{ user.name }}</span>
         </div>
         <div class="header-region">
-          <!-- <img :src="require(`/assets/images/${productItem.img}`)" /> -->
           <div class="header-user-active">
-            <img src="~assets/images/user_active.png" />
+            <img :src="require(`/assets/images/${user.avt}`)" />
           </div>
           <div class="header-region-flag">
-            <img src="~assets/images/region.jpg" alt="region" />
+            <img :src="require(`/assets/images/${user.regionImg}`)" />
           </div>
           <span class="header-region-name">VN</span>
         </div>
@@ -28,13 +28,20 @@
 export default {
   data() {
     return {
-      userName: "Sun Cometics",
+      user: {
+        avt: "user_active.png",
+        name: "Sun Cometics",
+        regionImg: "region.jpg",
+        optionLink: "Silver",
+      },
     };
   },
 };
 </script>
 
 <style>
+/* Header */
+
 .header {
   padding: 0 20px !important;
   height: 50px;

@@ -23,40 +23,64 @@
         </a-button>
 
         <a-menu-item key="1">
-          <a-icon type="appstore" />
-          <span>Dashboard</span>
+          <nuxt-link to="/">
+            <a-icon type="appstore" />
+            <span>Dashboard</span>
+          </nuxt-link>
         </a-menu-item>
         <a-menu-item key="2">
-          <a-icon type="line-chart" />
-          <span>Thống kê</span>
+          <nuxt-link to="/stats">
+            <a-icon type="line-chart" />
+            <span>Thống kê</span>
+          </nuxt-link>
         </a-menu-item>
         <a-menu-item key="3">
-          <a-icon type="shopping-cart" />
-          <span>Bán hàng</span>
+          <nuxt-link to="/sell-products">
+            <a-icon type="shopping-cart" />
+            <span style="color: #fff">Bán hàng</span>
+          </nuxt-link>
         </a-menu-item>
         <a-menu-item key="4">
-          <a-icon type="profile" />
-          <span>Đơn hàng</span>
+          <nuxt-link to="/order-products">
+            <a-icon type="profile" />
+            <span>Đơn hàng</span>
+          </nuxt-link>
         </a-menu-item>
         <a-sub-menu key="sub1">
           <span slot="title">
             <a-icon type="inbox" />
             <span>Sản phẩm</span>
           </span>
-          <a-menu-item key="5">Quản lý sản phẩm</a-menu-item>
-          <a-menu-item key="6">Nhập hàng</a-menu-item>
-          <a-menu-item key="7">Xuất hàng</a-menu-item>
-          <a-menu-item key="8">Lịch sử bán hàng</a-menu-item>
-          <a-menu-item key="9">Kho hàng</a-menu-item>
-          <a-menu-item key="10">Chuyển kho</a-menu-item>
+          <a-menu-item key="5">
+            <nuxt-link to="/products-management">Quản lý sản phẩm</nuxt-link>
+          </a-menu-item>
+          <a-menu-item key="6">
+            <nuxt-link to="/import-products">Nhập hàng</nuxt-link>
+          </a-menu-item>
+          <a-menu-item key="7">
+            <nuxt-link to="/export-products">Xuất hàng</nuxt-link>
+          </a-menu-item>
+          <a-menu-item key="8">
+            <nuxt-link to="/products-sales-history">Lịch sử bán hàng</nuxt-link>
+          </a-menu-item>
+          <a-menu-item key="9">
+            <nuxt-link to="/warehouse">Kho hàng</nuxt-link>
+          </a-menu-item>
+          <a-menu-item key="10">
+            <nuxt-link to="/warehouse-transfer">Chuyển kho</nuxt-link>
+          </a-menu-item>
         </a-sub-menu>
         <a-menu-item key="11">
-          <a-icon type="team" />
-          <span>Khách hàng</span>
+          <nuxt-link to="/customers">
+            <a-icon type="team" />
+            <span>Khách hàng</span>
+          </nuxt-link>
         </a-menu-item>
         <a-menu-item key="12">
-          <a-icon type="setting" />
-          <span>Cài đặt</span>
+          <nuxt-link to="/setting">
+            <a-icon type="setting" />
+            <span>Cài đặt</span>
+          </nuxt-link>
         </a-menu-item>
       </a-menu>
     </div>
@@ -64,11 +88,8 @@
 </template>
 
 <script>
-// import products from "@/pages/products.vue"
 export default {
-  components: {
-    // products,
-  },
+  components: {},
   data() {
     return {
       collapsed: false,
@@ -229,7 +250,8 @@ export default {
 .sidebar.isClose .ant-menu-submenu-title {
   padding: 0 13px !important;
   width: 43px;
-  margin: 0;
+  margin-bottom: 0;
+  margin-top: 4px;
 }
 
 /* menu sub */
