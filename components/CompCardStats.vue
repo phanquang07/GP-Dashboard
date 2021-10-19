@@ -4,8 +4,8 @@
     <section class="card-stats">
       <a-row :gutter="[12, 12]">
         <a-col
-          :lg="{ span: 8 }"
-          :md="{ span: 12 }"
+          :lg="8"
+          :md="12"
           class="card-stats-col"
           v-for="(statsItem, idx) in statsList"
           :key="idx"

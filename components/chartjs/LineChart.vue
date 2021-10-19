@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import LineChart from "~/components/chartjs/LineChart";
+import LineChart from "@/components/chartjs/LineChart";
 
 const chartColors = {
   blue: "rgb(72, 128, 255)",
@@ -34,6 +34,7 @@ const labels = [
 ];
 
 export default {
+  nameLC: 'LineChart',
   components: {
     LineChart,
   },

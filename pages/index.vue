@@ -45,7 +45,7 @@
               <span class="stats-chart-valueTrend">{{ tabsItem.valueTrend }}</span>
             </span>
             <div class="line-chart">
-              <LineChartD />
+              <line-chart />
             </div>
           </a-tab-pane>
         </a-tabs>
@@ -141,7 +141,7 @@
   </div>
 </template>
 <script>
-import LineChartD from "@/components/chartjs/LineChartD.vue";
+import LineChart from "@/components/chartjs/LineChart.vue";
 import CompCardStats from "@/components/CompCardStats.vue";
 
 export default {
@@ -150,7 +150,7 @@ export default {
     return 'dashboard'
   },
   components: {
-    LineChartD,
+    [LineChart.nameLC]: LineChart,
     [CompCardStats.name]: CompCardStats,
   },
   data() {
@@ -596,7 +596,7 @@ export default {
 }
 
 .top-product-staff .product-staff-title-item:last-child {
-  text-align: right !important;
+  text-align: right;
 }
 
 .top-product-staff .product-staff-title-item:last-child a {
@@ -663,5 +663,8 @@ export default {
   .header-region {
     margin-left: 10px;
   }
+  .top-product-staff .product-staff-title-item:last-child {
+  text-align: left;
+}
 }
 </style>
