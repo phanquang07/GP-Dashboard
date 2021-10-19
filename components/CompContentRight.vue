@@ -13,18 +13,18 @@
     <div class="stats-info">
       <a-row :gutter="[14, 14]">
         <a-col
-          :xl="{ span: 24 }"
-          :lg="{ span: 12 }"
-          :md="{ span: 24 }"
+          :xl="24"
+          :lg="12"
+          :md="24"
           v-for="(statsInfoItem, idx) in statsInfoList"
           :key="idx"
         >
           <section class="stats-info-item stats-today">
             <h2>{{ statsInfoItem.title }}</h2>
             <a-row :gutter="[0, 12]" class="stats-today-item">
-              <a-col :xs="{ span: 7 }" class="revenue-today-text">{{ statsInfoItem.revenueText }}</a-col>
+              <a-col :xs="7" class="revenue-today-text">{{ statsInfoItem.revenueText }}</a-col>
               <a-col
-                :xs="{ span: 17 }"
+                :xs="17"
                 class="revenue-today-value"
                 style="text-align: right"
               >{{ statsInfoItem.revenueValue }}</a-col>
@@ -35,7 +35,7 @@
               class="stats-today-item card-blue"
             >
               <a-col
-                :sm="{ span: 12 }"
+                :sm="12"
                 class="stats-today-col"
                 v-for="(statsTodayItem, idx) in statsInfoItem.cardStatsToday"
                 :key="idx"
@@ -67,26 +67,26 @@
               </a-col>
             </a-row>
             <a-row :gutter="[12, 12]" class="stats-today-item">
-              <a-col :xs="{ span: 12 }" class="quantity-today-text">{{ statsInfoItem.canceledText }}</a-col>
+              <a-col :xs="12" class="quantity-today-text">{{ statsInfoItem.canceledText }}</a-col>
               <a-col
-                :xs="{ span: 12 }"
+                :xs="12"
                 class="quantity-today-monney"
               >{{ statsInfoItem.canceledValue }}</a-col>
             </a-row>
             <a-row :gutter="[12, 12]" class="stats-today-item">
-              <a-col :xs="{ span: 12 }" class="quantity-today-text">{{ statsInfoItem.closedText }}</a-col>
+              <a-col :xs="12" class="quantity-today-text">{{ statsInfoItem.closedText }}</a-col>
               <a-col
-                :xs="{ span: 12 }"
+                :xs="12"
                 class="quantity-today-monney"
               >{{ statsInfoItem.closedValue }}</a-col>
             </a-row>
             <a-row :gutter="[12, 12]" class="stats-today-item">
               <a-col
-                :xs="{ span: 12 }"
+                :xs="12"
                 class="quantity-today-text"
               >{{ statsInfoItem.succeededText }}</a-col>
               <a-col
-                :xs="{ span: 12 }"
+                :xs="12"
                 class="quantity-today-monney"
               >{{ statsInfoItem.succeededValue }}</a-col>
             </a-row>
@@ -99,10 +99,12 @@
 
 <script>
 export default {
+  // props: ['userName'],
   data() {
     return {
       user: {
         name: "Sun Cometics",
+        optionLink: 'Silver',
       },
       // Stats info list
       statsInfoList: [
