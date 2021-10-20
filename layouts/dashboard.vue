@@ -5,7 +5,7 @@
       <comp-sidebar />
       <a-layout>
         <!-- Header -->
-        <comp-header />
+        <comp-header :userName="userName" :abbreviation="abbreviation" :region="region" />
         <!-- Main -->
         <a-layout-content class="main">
           <a-row :gutter="[14, 14]">
@@ -13,7 +13,7 @@
               <Nuxt />
             </a-col>
             <a-col :xl="8" class="content-right">
-              <comp-content-right />
+              <comp-content-right :userName="userName" />
             </a-col>
           </a-row>
         </a-layout-content>
@@ -32,6 +32,13 @@ export default {
     CompHeader,
     CompContentRight,
   },
+  data() {
+    return {
+       userName: 'Sun Cometics',
+       abbreviation: 'SC',
+       region: 'VN'
+    }
+  }
 };
 </script>
 

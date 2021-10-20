@@ -3,7 +3,7 @@
     <!-- Content right -->
     <!-- Say Hello -->
     <section class="sayHello">
-      <h2 class="sayHello-title">Xin chào! {{ user.name }}</h2>
+      <h2 class="sayHello-title">Xin chào! {{ userName }}</h2>
       <p>
         Gói đang sử dụng:
         <NuxtLink to="/">{{ user.optionLink }}</NuxtLink>
@@ -99,11 +99,10 @@
 
 <script>
 export default {
-  // props: ['userName'],
+  props:{ userName: String },
   data() {
     return {
       user: {
-        name: "Sun Cometics",
         optionLink: 'Silver',
       },
       // Stats info list

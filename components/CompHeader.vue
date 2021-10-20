@@ -7,8 +7,8 @@
       </a-col>
       <a-col :span="20" class="header-info-user">
         <div class="header-user-name">
-          <a-avatar style="color: #fff; backgroundColor: #F3A100">SC</a-avatar>
-          <span class="header-user-fullName">{{ user.name }}</span>
+          <a-avatar style="color: #fff; backgroundColor: #F3A100">{{ abbreviation }}</a-avatar>
+          <span class="header-user-fullName">{{ userName }}</span>
         </div>
         <div class="header-region">
           <div class="header-user-active">
@@ -17,7 +17,7 @@
           <div class="header-region-flag">
             <img :src="require(`/assets/images/${user.regionImg}`)" />
           </div>
-          <span class="header-region-name">VN</span>
+          <span class="header-region-name">{{ region }}</span>
         </div>
       </a-col>
     </a-row>
@@ -30,12 +30,12 @@ export default {
     return {
       user: {
         avt: "user_active.png",
-        name: "Sun Cometics",
         regionImg: "region.jpg",
         optionLink: "Silver",
       },
     };
   },
+  props: { userName: String, abbreviation: String, region: String },
 };
 </script>
 
